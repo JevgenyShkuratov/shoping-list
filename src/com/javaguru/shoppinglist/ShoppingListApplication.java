@@ -1,13 +1,13 @@
 package com.javaguru.shoppinglist;
 
+import com.javaguru.shoppinglist.Validation.ProductNameValidationRule;
+import com.javaguru.shoppinglist.Validation.ProductValidationRule;
+import com.javaguru.shoppinglist.Validation.ProductValidationService;
 import jdk.jfr.Category;
 
 import javax.xml.namespace.QName;
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 class ShoppingListApplication {
 
@@ -50,6 +50,10 @@ class ShoppingListApplication {
                         productRepository.put(productIdSequence, product);
                         productIdSequence++;
                         System.out.println("Result: " + product.getId());
+                        Set<ProductValidationRule> rules = new HashSet<>();
+                        rules.add(new ProductNameValidationRule());
+                        ProductValidationService productValidationService = new ProductValidationService();
+                        productValidationService.validate(product);
 
                     case 2:
                         System.out.println("Enter product id: ");
