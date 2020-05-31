@@ -22,26 +22,10 @@ public class ConsoleUI {
                 Integer userInput = Integer.valueOf(scanner.nextLine());
                 switch (userInput) {
                     case 1:
-                        System.out.println("Введите наименование продукта: ");
-                        String name = scanner.nextLine();
-                        System.out.println("Введите описание: ");
-                        String description = scanner.nextLine();
-                        System.out.println("Введите цену: ");
-                        BigDecimal price = new BigDecimal(scanner.nextLine());
-                        System.out.println("Введите скидку: ");
-                        BigDecimal discount = new BigDecimal(scanner.nextLine());
-                        System.out.println("Введите категорию: ");
-                        String category = scanner.nextLine();
-
-                        Product product = new Product(name, description, price, discount, category);
-                        Product createdProduct = service.save(product);
-                        System.out.println("Product + " + createdProduct);
+                        createProduct();
                         break;
                     case 2:
-                        System.out.println("Enter product id : ");
-                        Long id = Long.valueOf(scanner.nextLine());
-                        Product product1 = service.findTaskById(id);
-                        System.out.println("Product found: " + product1);
+                        findProduct();
                         break;
                     case 3:
                         return;
@@ -54,5 +38,30 @@ public class ConsoleUI {
                 System.out.println("Что пошло не так Error.");
             }
         }
+    }
+
+    public void createProduct() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Введите наименование продукта: ");
+        String name = scanner.nextLine();
+        System.out.println("Введите описание: ");
+        String description = scanner.nextLine();
+        System.out.println("Введите цену: ");
+        BigDecimal price = new BigDecimal(scanner.nextLine());
+        System.out.println("Введите скидку: ");
+        BigDecimal discount = new BigDecimal(scanner.nextLine());
+        System.out.println("Введите категорию: ");
+        String category = scanner.nextLine();
+        Product product = new Product(name, description, price, discount, category);
+        Product createdProduct = service.save(product);
+        System.out.println("Product + " + createdProduct);
+    }
+
+    public void findProduct() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter product id : ");
+        Long id = Long.valueOf(scanner.nextLine());
+        Product product1 = service.findTaskById(id);
+        System.out.println("Product found: " + product1);
     }
 }
