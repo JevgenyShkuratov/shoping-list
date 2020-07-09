@@ -14,6 +14,7 @@ public class ProductValidationService {
         validationRules.add(new ProductDescriptionRule());
         validationRules.add(new ProductPriceValidationRule());
         validationRules.add(new ProductDiscountValidationRule());
+        validationRules.add(new ProductDiscountAllowedValidationRule());
     }
 
     public void validate(Product product) {
