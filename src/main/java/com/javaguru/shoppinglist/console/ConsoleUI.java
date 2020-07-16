@@ -1,6 +1,7 @@
 package com.javaguru.shoppinglist.console;
 
-import com.javaguru.shoppinglist.domain.Product;
+import com.javaguru.shoppinglist.domain.ProductEntity;
+import com.javaguru.shoppinglist.dto.ProductDto;
 import com.javaguru.shoppinglist.service.ProductService;
 import com.javaguru.shoppinglist.service.validation.ProductNotFoundException;
 import com.javaguru.shoppinglist.service.validation.ProductValidationException;
@@ -52,16 +53,22 @@ public class ConsoleUI {
         BigDecimal discount = new BigDecimal(scanner.nextLine());
         System.out.println("Введите категорию: ");
         String category = scanner.nextLine();
-        Product product = new Product(name, description, price, discount, category);
-        Product createdProduct = service.save(product);
-        System.out.println("Product + " + createdProduct);
+        ProductDto dto = new ProductDto();
+        dto.setName(name);
+        dto.setDescription(description);
+        dto.setPrice(new BigDecimal(String.valueOf(price)));
+        dto.setDiscount(new BigDecimal(String.valueOf(discount)));
+        dto.setCategory(category);
+
+        ProductDto productDto = service.save(dto);
+        System.out.println("Product + " + productDto);
     }
 
     public void findProduct() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter product id : ");
         Long id = Long.valueOf(scanner.nextLine());
-        Product product1 = service.findTaskById(id);
-        System.out.println("Product found: " + product1);
+        ProductEntity productEntity1 = service.findTaskById(id);
+        System.out.println("Product found: " + productEntity1);
     }
 }
