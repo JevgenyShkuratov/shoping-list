@@ -3,16 +3,19 @@ package com.javaguru.shoppinglist.service.validation;
 import com.javaguru.shoppinglist.domain.ProductEntity;
 import com.javaguru.shoppinglist.dto.ProductDto;
 
+import java.math.BigDecimal;
+
 public class ProductNameValidationRule implements ProductValidationRule {
 
     @Override
     public void validate(ProductDto productDto) {
-        if (productDto.getName() == null) {
-            throw new ProductValidationException("Имя продукта не может быть null.");
-        } else {
-            if (productDto.getName().length() < 3 || productDto.getName().length() > 32) {
-                throw new ProductValidationException("Имя продукта должно содержать от 3 до 32 символов.");
-            }
+        checkNotNull(productDto);
+
+        if (productDto.getName() == null || productDto.getName().isEmpty()) {
+            throw new ProductValidationException("Product name must be not null.");
+        }
+        if (productDto.getName().length() < 3 || productDto.getName().length() > 32) {
+            throw new ProductValidationException("Product name length from 3 to 32.");
         }
     }
 }

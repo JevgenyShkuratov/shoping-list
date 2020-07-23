@@ -10,4 +10,6 @@ public interface ProductRepository {
 
     Optional<ProductEntity> findProductById(Long id);
 
+    Optional<ProductEntity> findProductByName(String name);
+
 }

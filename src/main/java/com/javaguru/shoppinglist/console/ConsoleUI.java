@@ -11,7 +11,11 @@ import java.util.Scanner;
 
 public class ConsoleUI {
 
-    private ProductService service = new ProductService();
+    private ProductService service;
+
+    public ConsoleUI(ProductService service) {
+        this.service = service;
+    }
 
     public void start() {
         Scanner scanner = new Scanner(System.in);
@@ -36,22 +40,24 @@ public class ConsoleUI {
             } catch (ProductNotFoundException e) {
                 System.out.println(e.getMessage());
             } catch (Exception e) {
-                System.out.println("Что пошло не так Error.");
+                System.out.println("Error! Please try again." + e.getMessage());
+                //e.printStackTrace();
+                e.getMessage();
             }
         }
     }
 
     public void createProduct() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Введите наименование продукта: ");
+        System.out.println("Enter product: ");
         String name = scanner.nextLine();
-        System.out.println("Введите описание: ");
+        System.out.println("Enter description: ");
         String description = scanner.nextLine();
-        System.out.println("Введите цену: ");
+        System.out.println("Enter price: ");
         BigDecimal price = new BigDecimal(scanner.nextLine());
-        System.out.println("Введите скидку: ");
+        System.out.println("Enter discount: ");
         BigDecimal discount = new BigDecimal(scanner.nextLine());
-        System.out.println("Введите категорию: ");
+        System.out.println("Enter category: ");
         String category = scanner.nextLine();
         ProductDto dto = new ProductDto();
         dto.setName(name);

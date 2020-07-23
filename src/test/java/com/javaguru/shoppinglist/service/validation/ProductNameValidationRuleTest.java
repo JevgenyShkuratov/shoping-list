@@ -1,62 +1,38 @@
 package com.javaguru.shoppinglist.service.validation;
 
 import com.javaguru.shoppinglist.dto.ProductDto;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.internal.runners.statements.ExpectException;
-import org.junit.rules.ExpectedException;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import static org.junit.Assert.*;
 
 public class ProductNameValidationRuleTest {
-    @Rule
-    public ExpectedException exception = ExpectedException.none();
 
     private ProductNameValidationRule victim = new ProductNameValidationRule();
 
+    ProductDto input = new ProductDto();
+
     @Test
-    public void productNameWhenNull() {
-        ProductDto productDto = new ProductDto();
-        productDto.setName(null);
-        exception.expect(ProductValidationException.class);
-        exception.expectMessage("Имя продукта не может быть null.");
-        victim.validate(productDto);
+    public void shouldProductNameValidationException() {
+        input.setName("");
+        assertThatThrownBy(() -> victim.validate(input))
+                .isInstanceOf(ProductValidationException.class)
+                .hasMessage("Product name must be not null.");
     }
 
     @Test
-    public void productLengthToShort() {
-        ProductDto productDto = new ProductDto();
-        productDto.setName("12");
-        exception.expect(ProductValidationException.class);
-        exception.expectMessage("Имя продукта должно содержать от 3 до 32 символов.");
-        victim.validate(productDto);
+    public void shouldProductLengthToShort() {
+        input.setName("12");
+        assertThatThrownBy(() -> victim.validate(input))
+                .isInstanceOf(ProductValidationException.class)
+                .hasMessage("Product name length from 3 to 32.");
     }
 
     @Test
-    public void productLengthToLong() {
-        ProductDto productDto = new ProductDto();
-        productDto.setName("123456789012345678901234567890123");
-        exception.expect(ProductValidationException.class);
-        exception.expectMessage("Имя продукта должно содержать от 3 до 32 символов.");
-        victim.validate(productDto);
-    }
+    public void shouldProductLengthToLong() {
+        input.setName("123456789012345678901234567890123");
+        assertThatThrownBy(() -> victim.validate(input))
+                .isInstanceOf(ProductValidationException.class)
+                .hasMessage("Product name length from 3 to 32.");
 
+    }
 }
-
-
-//
-//    ProductNameValidationRule validationRule = new ProductNameValidationRule();
-//    ProductDto victim = new ProductDto();
-//
-//    @Test
-//    public void productIsNull() throws Exception {
-//        victim.setName(null);
-//        try {
-//            validationRule.validate(victim);
-//            fail();
-//        } catch (
-//                Exception e) {
-//            assertEquals(e.getMessage(), "Имя продукта не может быть null.");
-//        }
-//
-//    }
