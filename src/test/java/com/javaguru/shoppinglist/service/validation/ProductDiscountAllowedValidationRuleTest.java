@@ -19,7 +19,7 @@ public class ProductDiscountAllowedValidationRuleTest {
     @Test
     public void productDiscountAllowed(){
         ProductDto productDto = new ProductDto();
-        productDto.setDiscount(BigDecimal.ZERO);
+        productDto.setPrice(BigDecimal.ZERO);
         exception.expect(ProductValidationException.class);
         exception.expectMessage(" Скидка не возможна при цене ниже 20");
         victim.validate(productDto);
