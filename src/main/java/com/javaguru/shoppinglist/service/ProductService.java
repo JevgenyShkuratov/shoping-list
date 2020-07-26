@@ -6,7 +6,9 @@ import com.javaguru.shoppinglist.mappers.ProductMapper;
 import com.javaguru.shoppinglist.repository.ProductRepository;
 import com.javaguru.shoppinglist.service.validation.ProductNotFoundException;
 import com.javaguru.shoppinglist.service.validation.ProductValidationService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ProductService {
     private final ProductRepository productRepository;
     private final ProductValidationService validationService;

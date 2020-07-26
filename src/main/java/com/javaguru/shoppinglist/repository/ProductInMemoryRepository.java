@@ -1,12 +1,14 @@
 package com.javaguru.shoppinglist.repository;
 
 import com.javaguru.shoppinglist.domain.ProductEntity;
+import org.springframework.stereotype.Repository;
 
 import javax.swing.text.html.Option;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+@Repository
 public class ProductInMemoryRepository implements ProductRepository {
 
     private final Map<Long, ProductEntity> repository = new HashMap<>();

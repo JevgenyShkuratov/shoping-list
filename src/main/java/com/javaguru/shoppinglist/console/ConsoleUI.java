@@ -1,40 +1,33 @@
 package com.javaguru.shoppinglist.console;
 
-import com.javaguru.shoppinglist.domain.ProductEntity;
-import com.javaguru.shoppinglist.dto.ProductDto;
-import com.javaguru.shoppinglist.service.ProductService;
 import com.javaguru.shoppinglist.service.validation.ProductNotFoundException;
 import com.javaguru.shoppinglist.service.validation.ProductValidationException;
+import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
+import java.util.List;
 import java.util.Scanner;
 
+@Component
 public class ConsoleUI {
+    private final List<MenuAction> actions;
 
-    private ProductService service;
-
-    public ConsoleUI(ProductService service) {
-        this.service = service;
+    public ConsoleUI(List<MenuAction> actions) {
+        this.actions = actions;
     }
 
     public void start() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             try {
-                System.out.println("1. Create product");
-                System.out.println("2. Find product by id");
-                System.out.println("3. Exit");
-                Integer userInput = Integer.valueOf(scanner.nextLine());
-                switch (userInput) {
-                    case 1:
-                        createProduct();
-                        break;
-                    case 2:
-                        findProduct();
-                        break;
-                    case 3:
-                        return;
+                for (int i = 0; i < actions.size(); i++) {
+                    System.out.println(i + ". " + actions.get(i));
                 }
+                int userInput = Integer.parseInt(scanner.nextLine());
+                if (userInput < 0 || userInput >= actions.size()) {
+                    throw new IllegalArgumentException("Incorrect input.");
+                }
+                actions.get(userInput).execute();
+
             } catch (ProductValidationException e) {
                 System.out.println("Product validation failed. Message " + e.getMessage());
             } catch (ProductNotFoundException e) {
@@ -45,36 +38,5 @@ public class ConsoleUI {
                 e.getMessage();
             }
         }
-    }
-
-    public void createProduct() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter product: ");
-        String name = scanner.nextLine();
-        System.out.println("Enter description: ");
-        String description = scanner.nextLine();
-        System.out.println("Enter price: ");
-        BigDecimal price = new BigDecimal(scanner.nextLine());
-        System.out.println("Enter discount: ");
-        BigDecimal discount = new BigDecimal(scanner.nextLine());
-        System.out.println("Enter category: ");
-        String category = scanner.nextLine();
-        ProductDto dto = new ProductDto();
-        dto.setName(name);
-        dto.setDescription(description);
-        dto.setPrice(new BigDecimal(String.valueOf(price)));
-        dto.setDiscount(new BigDecimal(String.valueOf(discount)));
-        dto.setCategory(category);
-
-        ProductDto productDto = service.save(dto);
-        System.out.println("Product + " + productDto);
-    }
-
-    public void findProduct() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter product id : ");
-        Long id = Long.valueOf(scanner.nextLine());
-        ProductEntity productEntity1 = service.findTaskById(id);
-        System.out.println("Product found: " + productEntity1);
     }
 }
