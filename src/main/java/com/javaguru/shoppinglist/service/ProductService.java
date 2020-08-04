@@ -3,15 +3,24 @@ package com.javaguru.shoppinglist.service;
 import com.javaguru.shoppinglist.domain.ProductEntity;
 import com.javaguru.shoppinglist.dto.ProductDto;
 import com.javaguru.shoppinglist.mappers.ProductMapper;
-import com.javaguru.shoppinglist.repository.ProductInMemoryRepository;
 import com.javaguru.shoppinglist.repository.ProductRepository;
 import com.javaguru.shoppinglist.service.validation.ProductNotFoundException;
 import com.javaguru.shoppinglist.service.validation.ProductValidationService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ProductService {
-    private  ProductRepository productRepository = new ProductInMemoryRepository();
-    private  ProductValidationService validationService = new ProductValidationService();
-    private  ProductMapper productMapper = new ProductMapper();
+    private final ProductRepository productRepository;
+    private final ProductValidationService validationService;
+    private final ProductMapper productMapper;
+
+    public ProductService(ProductRepository productRepository,
+                          ProductValidationService validationService,
+                          ProductMapper productMapper) {
+        this.productRepository = productRepository;
+        this.validationService = validationService;
+        this.productMapper = productMapper;
+    }
 
     public ProductDto save(ProductDto productDto) {
         validationService.validate(productDto);

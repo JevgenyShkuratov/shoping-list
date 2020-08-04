@@ -1,16 +1,18 @@
 package com.javaguru.shoppinglist.repository;
 
 import com.javaguru.shoppinglist.domain.ProductEntity;
+import org.springframework.stereotype.Repository;
 
+import javax.swing.text.html.Option;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+@Repository
 public class ProductInMemoryRepository implements ProductRepository {
 
     private final Map<Long, ProductEntity> repository = new HashMap<>();
     private Long productIdSequence = 0L;
-
 
     @Override
     public ProductEntity save(ProductEntity productEntity) {
@@ -25,6 +27,12 @@ public class ProductInMemoryRepository implements ProductRepository {
     @Override
     public Optional<ProductEntity> findProductById(Long id) {
         return Optional.ofNullable(repository.get(id));
+    }
 
+    @Override
+    public Optional<ProductEntity> findProductByName(String name) {
+        return repository.values().stream()
+                .filter(entity -> entity.getName().equalsIgnoreCase(name))
+                .findFirst();
     }
 }
