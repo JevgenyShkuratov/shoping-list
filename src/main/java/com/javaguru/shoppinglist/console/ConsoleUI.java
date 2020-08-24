@@ -20,7 +20,7 @@ public class ConsoleUI {
         while (true) {
             try {
                 for (int i = 0; i < actions.size(); i++) {
-                    System.out.println(i + ". " + actions.get(i));
+                    System.out.println(i + ". " + actions.get(i).getMenuActionName());
                 }
                 int userInput = Integer.parseInt(scanner.nextLine());
                 if (userInput < 0 || userInput >= actions.size()) {
@@ -34,7 +34,7 @@ public class ConsoleUI {
                 System.out.println(e.getMessage());
             } catch (Exception e) {
                 System.out.println("Error! Please try again." + e.getMessage());
-                //e.printStackTrace();
+                e.printStackTrace();
                 e.getMessage();
             }
         }

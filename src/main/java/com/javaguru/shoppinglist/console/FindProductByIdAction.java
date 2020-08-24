@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.Scanner;
 
 @Component
-@Order(1)
+@Order(2)
 public class FindProductByIdAction implements MenuAction{
 
     private final ProductService service;
@@ -29,7 +29,7 @@ public class FindProductByIdAction implements MenuAction{
     }
 
     @Override
-    public String toString() {
+    public String getMenuActionName() {
         return "Find product by id";
     }
 }

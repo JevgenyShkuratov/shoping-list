@@ -1,14 +1,16 @@
 package com.javaguru.shoppinglist.repository;
 
 import com.javaguru.shoppinglist.domain.ProductEntity;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
-import javax.swing.text.html.Option;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 @Repository
+@Profile("inmemory")
 public class ProductInMemoryRepository implements ProductRepository {
 
     private final Map<Long, ProductEntity> repository = new HashMap<>();
@@ -34,5 +36,10 @@ public class ProductInMemoryRepository implements ProductRepository {
         return repository.values().stream()
                 .filter(entity -> entity.getName().equalsIgnoreCase(name))
                 .findFirst();
+    }
+
+    @Override
+    public List<ProductEntity> findAll() {
+        return null;
     }
 }

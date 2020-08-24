@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.util.Scanner;
 
 @Component
-@Order(0)
+@Order(1)
 public class CreateProductAction implements MenuAction {
 
     private final ProductService service;
@@ -44,7 +44,7 @@ public class CreateProductAction implements MenuAction {
     }
 
     @Override
-    public String toString() {
+    public String getMenuActionName() {
         return "Create product";
     }
 }

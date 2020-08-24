@@ -5,13 +5,15 @@ import java.util.Objects;
 
 public class ProductEntity {
 
-    private Long id;
-    private String name;
-    private String description;
-    private BigDecimal price;
-    private BigDecimal discount;
-    private String category;
+    private  Long id;
+    private  String name;
+    private  String description;
+    private  BigDecimal price;
+    private  BigDecimal discount;
+    private  String category;
 
+    public ProductEntity() {
+    }
 
     public ProductEntity(Long id, String name, String description, BigDecimal price, BigDecimal discount, String category) {
         this.id = id;
@@ -21,14 +23,6 @@ public class ProductEntity {
         this.discount = discount;
         this.category = category;
 
-    }
-
-    public ProductEntity(String name, String description, BigDecimal price, BigDecimal discount, String category) {
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.discount = discount;
-        this.category = category;
     }
 
     public Long getId() {
@@ -55,6 +49,30 @@ public class ProductEntity {
         return category;
     }
 
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public void setDiscount(BigDecimal discount) {
+        this.discount = discount;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
     @Override
     public boolean equals(Object o) {
