@@ -32,7 +32,7 @@ public class ProductService {
 
     }
 
-    public ProductEntity findTaskById(Long id) {
+    public ProductEntity findProductById(Long id) {
         return productRepository.findProductById(id)
                 .orElseThrow(() -> new ProductNotFoundException("Product not found, id: " + id));
     }
