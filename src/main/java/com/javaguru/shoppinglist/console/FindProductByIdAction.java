@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.Scanner;
 
 @Component
-@Order(1)
+@Order(2)
 public class FindProductByIdAction implements MenuAction{
 
     private final ProductService service;
@@ -23,13 +23,13 @@ public class FindProductByIdAction implements MenuAction{
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter product id : ");
         Long id = Long.valueOf(scanner.nextLine());
-        ProductEntity productEntity = service.findTaskById(id);
+        ProductEntity productEntity = service.findProductById(id);
         System.out.println("Product found: " + productEntity);
 
     }
 
     @Override
-    public String toString() {
+    public String getMenuActionName() {
         return "Find product by id";
     }
 }

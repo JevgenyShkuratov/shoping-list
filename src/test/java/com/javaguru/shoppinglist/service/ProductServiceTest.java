@@ -4,7 +4,6 @@ import com.javaguru.shoppinglist.domain.ProductEntity;
 import com.javaguru.shoppinglist.dto.ProductDto;
 import com.javaguru.shoppinglist.mappers.ProductMapper;
 import com.javaguru.shoppinglist.repository.ProductInMemoryRepository;
-import com.javaguru.shoppinglist.repository.ProductRepository;
 import com.javaguru.shoppinglist.service.validation.ProductValidationService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

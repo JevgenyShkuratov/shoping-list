@@ -8,6 +8,8 @@ import com.javaguru.shoppinglist.service.validation.ProductNotFoundException;
 import com.javaguru.shoppinglist.service.validation.ProductValidationService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProductService {
     private final ProductRepository productRepository;
@@ -30,8 +32,12 @@ public class ProductService {
 
     }
 
-    public ProductEntity findTaskById(Long id) {
+    public ProductEntity findProductById(Long id) {
         return productRepository.findProductById(id)
-                .orElseThrow(() -> new ProductNotFoundException("Продукт не найден, id: " + id));
+                .orElseThrow(() -> new ProductNotFoundException("Product not found, id: " + id));
+    }
+
+    public List<ProductEntity> findAll() {
+        return productRepository.findAll();
     }
 }
